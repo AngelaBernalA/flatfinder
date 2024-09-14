@@ -1,0 +1,13 @@
+<p>navbar works!</p>
+
+<nav>
+    <a routerLink="/">Home</a>
+    <div *ngIf="user$ | async as user; else loggedOut">
+      <span>Welcome, {{ user.firstName }}</span>
+      <button (click)="logout()">Logout</button>
+    </div>
+    <ng-template #loggedOut>
+      <a routerLink="/login">Login</a>
+      <a routerLink="/register">Register</a>
+    </ng-template>
+  </nav>

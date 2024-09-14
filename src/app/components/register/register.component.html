@@ -1,0 +1,33 @@
+<div class="register-container">
+    <h2>Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+  
+      <input type="email" formControlName="email" placeholder="Email" required>
+      <div *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+        Email is required and must be in a valid format.
+      </div>
+  
+      <input type="password" formControlName="password" placeholder="Password" required>
+      <div *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+        Password must be at least 6 characters, include a letter, a number, and a special character.
+      </div>
+  
+      <input type="text" formControlName="firstName" placeholder="First Name" required>
+      <div *ngIf="registerForm.controls['firstName'].invalid && registerForm.controls['firstName'].touched">
+        First name is required and must be at least 2 characters.
+      </div>
+  
+      <input type="text" formControlName="lastName" placeholder="Last Name" required>
+      <div *ngIf="registerForm.controls['lastName'].invalid && registerForm.controls['lastName'].touched">
+        Last name is required and must be at least 2 characters.
+      </div>
+  
+      <input type="date" formControlName="birthDate" required>
+      <div *ngIf="registerForm.controls['birthDate'].invalid && registerForm.controls['birthDate'].touched">
+        Birth date is required and age must be between 18 and 120.
+      </div>
+  
+      <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    </form>
+  </div>
+  
