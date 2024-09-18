@@ -1,0 +1,21 @@
+<div *ngIf="user$ | async as user">
+  <div class="profile-container">
+    <h2>Your Profile</h2>
+  
+    <!-- Display user details -->
+    <p><strong>First Name:</strong> {{ user.firstName }}</p>
+    <p><strong>Last Name:</strong> {{ user.lastName }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Birth Date:</strong> {{ user.birthDate | date: 'longDate' }}</p>
+  
+    <!-- Edit Profile Button -->
+    <button (click)="editProfile()">Edit Profile</button>
+  </div>
+  
+  </div>
+  
+  <!-- In case the user data is not available yet -->
+  <div *ngIf="!(user$ | async)">
+    <p>Loading profile...</p>
+  </div>
+  

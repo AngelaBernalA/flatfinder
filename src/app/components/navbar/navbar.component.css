@@ -1,0 +1,46 @@
+/* Basic Styling for the Navbar */
+nav {
+    background-color: #f8f9fa; /* Light background */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Lato', sans-serif;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #333; /* Dark text */
+    font-size: 16px;
+    margin-right: 20px;
+    transition: color 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: #007bff; /* Blue on hover */
+  }
+  
+  nav button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+  }
+  
+  nav button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Profile Welcome Text */
+  nav span {
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: auto;
+    color: #007bff;
+  }
+  

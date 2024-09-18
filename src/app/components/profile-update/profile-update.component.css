@@ -1,5 +1,5 @@
-/* Login Form Container */
-.login-container {
+/* Profile Update Form */
+.profile-update-container {
     max-width: 400px;
     margin: 50px auto;
     background-color: #fff;
@@ -9,21 +9,21 @@
     font-family: 'Lato', sans-serif;
   }
   
-  .login-container h2 {
+  .profile-update-container h2 {
     text-align: center;
     color: #333;
     font-size: 28px;
     margin-bottom: 20px;
   }
   
-  .login-container label {
+  .profile-update-container label {
     font-size: 16px;
     color: #333;
     margin-bottom: 5px;
     display: block;
   }
   
-  .login-container input {
+  .profile-update-container input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -32,7 +32,13 @@
     border: 1px solid #ccc;
   }
   
-  .login-container button {
+  .profile-update-container input:focus {
+    outline: none;
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Slight glow effect */
+  }
+  
+  .profile-update-container button {
     width: 100%;
     background-color: #007bff;
     color: white;
@@ -45,14 +51,7 @@
     transition: background-color 0.3s ease;
   }
   
-  .login-container button:hover {
+  .profile-update-container button:hover {
     background-color: #0056b3;
   }
-
-  input:focus {
-    outline: none;
-    border-color: #007bff; /* Blue border on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Slight glow effect */
-  }
-  
   

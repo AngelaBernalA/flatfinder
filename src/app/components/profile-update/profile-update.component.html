@@ -1,0 +1,44 @@
+<div *ngIf="userForm">
+  <div class="profile-update-container">
+    <h2>Update Profile</h2>
+  
+    <!-- Profile Update Form -->
+    <form [formGroup]="userForm" (ngSubmit)="updateProfile()">
+  
+      <label for="firstName">First Name</label>
+      <input id="firstName" type="text" formControlName="firstName">
+      <div *ngIf="userForm.controls['firstName'].invalid && userForm.controls['firstName'].touched">
+        First Name is required and must be at least 2 characters long.
+      </div>
+  
+      <label for="lastName">Last Name</label>
+      <input id="lastName" type="text" formControlName="lastName">
+      <div *ngIf="userForm.controls['lastName'].invalid && userForm.controls['lastName'].touched">
+        Last Name is required and must be at least 2 characters long.
+      </div>
+  
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email">
+      <div *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+        A valid email is required.
+      </div>
+  
+      <label for="birthDate">Birth Date</label>
+      <input id="birthDate" type="date" formControlName="birthDate">
+      <div *ngIf="userForm.controls['birthDate'].invalid && userForm.controls['birthDate'].touched">
+        Birth Date is required.
+      </div>
+  
+      <!-- Password Update (optional) -->
+      <label for="password">Password (leave blank to keep current)</label>
+      <input id="password" type="password" formControlName="password">
+  
+      <label for="confirmPassword">Confirm Password</label>
+      <input id="confirmPassword" type="password" formControlName="confirmPassword">
+  
+      <button type="submit" [disabled]="userForm.invalid">Update Profile</button>
+    </form>
+  </div>
+  
+  </div>
+  

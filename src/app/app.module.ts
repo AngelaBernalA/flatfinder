@@ -16,6 +16,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     NewFlatComponent,
     LoginComponent,
     RegisterComponent,
-    NavbarComponent
+    NavbarComponent,
+    ProfileComponent,
+    ProfileUpdateComponent
   ],
   imports: [
     BrowserModule,
