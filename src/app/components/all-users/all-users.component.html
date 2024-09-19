@@ -1,0 +1,68 @@
+<div class="all-users-container">
+    <h2>All Users</h2>
+
+    <div class="filters">
+        <!-- User Type Filter -->
+        <label>User Type</label>
+        <select [(ngModel)]="filters.userType">
+          <option value="">All</option>
+          <option value="admin">Admin</option>
+          <option value="regular">Regular</option>
+        </select>
+      
+        <!-- Age Range Filter -->
+        <label>Age Range</label>
+        <input type="number" [(ngModel)]="filters.minAge" placeholder="Min Age">
+        <input type="number" [(ngModel)]="filters.maxAge" placeholder="Max Age">
+      
+        <!-- Flats Counter Filter -->
+        <label>Flats Published</label>
+        <input type="number" [(ngModel)]="filters.minFlats" placeholder="Min Flats">
+        <input type="number" [(ngModel)]="filters.maxFlats" placeholder="Max Flats">
+      
+        <!-- Is Admin Filter -->
+        <label>Is Admin</label>
+        <select [(ngModel)]="filters.isAdmin">
+          <option value="">All</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      
+        <button (click)="applyFilters()">Apply Filters</button>
+      </div>
+      
+      <!-- User Table as before -->
+      
+  
+    <!-- Table for displaying all users -->
+    <table>
+      <thead>
+        <tr>
+          <th (click)="sortBy('firstName')">First Name</th>
+          <th (click)="sortBy('lastName')">Last Name</th>
+          <th>Email</th>
+          <th>Age</th>
+          <th>Flats Published</th>
+          <th>Is Admin</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers">
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ calculateAge(user.birthDate) }}</td>
+          <td>{{ user.flatsCounter }}</td>
+          <td>{{ user.isAdmin ? 'Yes' : 'No' }}</td>
+          <td>
+            <!-- Admin actions -->
+            <button (click)="grantAdmin(user)">Grant Admin</button>
+            <button (click)="removeUser(user)">Remove User</button>
+            <button (click)="viewUserProfile(user)">View Profile</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

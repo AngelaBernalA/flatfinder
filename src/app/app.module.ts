@@ -18,6 +18,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
+import { AllUsersComponent } from './components/all-users/all-users.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ProfileUpdateComponent } from './components/profile-update/profile-upda
     RegisterComponent,
     NavbarComponent,
     ProfileComponent,
-    ProfileUpdateComponent
+    ProfileUpdateComponent,
+    AllUsersComponent
   ],
   imports: [
     BrowserModule,

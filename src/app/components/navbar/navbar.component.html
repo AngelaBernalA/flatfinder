@@ -3,7 +3,7 @@
 
   <!-- Show profile link if the user is logged in -->
   <div *ngIf="user$ | async as user; else loggedOut">
-    <span>Welcome, {{ user.firstName }}</span>
+    <span>Welcome, {{ user.firstName }} </span>
 
     <!-- Profile link -->
     <a routerLink="/profile">Profile</a>
@@ -11,6 +11,9 @@
     <!-- Edit Profile link (shown if the user is an admin or editing their own profile) -->
     <a *ngIf="authService.isUserAdmin() || isCurrentUser" routerLink="/profile-update">Edit Profile</a>
 
+    <!-- Only show All Users link if the current user is an admin -->
+    <a *ngIf="authService.isUserAdmin()" routerLink="/all-users">All Users</a>
+    
     <!-- Logout button -->
     <button (click)="logout()">Logout</button>
   </div>
