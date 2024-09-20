@@ -13,6 +13,8 @@
 
     <!-- Only show All Users link if the current user is an admin -->
     <a *ngIf="authService.isUserAdmin()" routerLink="/all-users">All Users</a>
+
+    <a routerLink="new-flat/">New Flat</a>
     
     <!-- Logout button -->
     <button (click)="logout()">Logout</button>

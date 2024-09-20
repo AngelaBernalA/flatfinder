@@ -1,1 +1,58 @@
-<p>new-flat works!</p>
+<form [formGroup]="newFlat" (ngSubmit)="addFlat()">
+    <div>
+        <label for="city">City:</label>
+        <input id="city" formControlName="city"/>
+        <div *ngIf="newFlat.get('city')?.invalid && newFlat.get('city')?.touched">
+            City is required.
+        </div>
+    </div>
+
+    <div>
+        <label for="streetName">StreetName:</label>
+        <input id="streetName" formControlName="streetName" type="string" />
+        <div *ngIf="newFlat.get('streetName')?.invalid && newFlat.get('streetName')?.touched">
+            Street Name is required.
+        </div>
+    </div>
+
+    <div>
+        <label for="streetNumber">StreetNumber:</label>
+        <input id="streetNumber" formControlName="streetNumber" type="number" />
+        <div *ngIf="newFlat.get('streetNumber')?.invalid && newFlat.get('streetNumber')?.touched">
+            Street Number is required and must be a number.
+        </div>
+    </div>
+
+    <div>
+        <label for="areaSize">Area Size:</label>
+        <input id="areaSize" formControlName="areaSize" type="number" />
+        <div *ngIf="newFlat.get('areaSize')?.invalid && newFlat.get('areaSize')?.touched">
+            Area Size is required and must be a number.
+        </div>
+    </div>
+
+    <div>
+        <label for="yearBuilt">Year Built:</label>
+        <input id="yearBuilt" formControlName="yearBuilt" type="number" />
+        <div *ngIf="newFlat.get('yearBuilt')?.invalid && newFlat.get('yearBuilt')?.touched">
+            Year Built is required and must be a number.
+        </div>
+    </div>
+
+    <div>
+        <label for="rentPrice">Rent Price:</label>
+        <input id="rentPrice" formControlName="rentPrice" type="number" />
+        <div *ngIf="newFlat.get('rentPrice')?.invalid && newFlat.get('rentPrice')?.touched">
+            Rent Price is required and must be a number.
+        </div>
+    </div>
+
+    <div>
+        <label for="dateAvailable">Date Available:</label>
+        <input id="dateAvailable" formControlName="dateAvailable" type="date" />
+        <div *ngIf="newFlat.get('dateAvailable')?.invalid && newFlat.get('dateAvailable')?.touched">
+            Date Available is required.
+        </div>
+    </div>
+    <button type="submit" [disabled]="newFlat.invalid">Submit</button>
+</form>
