@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { UserData } from '../models/user-data.model';
+import { FlatData } from '../models/flat-data.model';
 
 @Injectable({
   providedIn: 'root'
@@ -104,5 +105,27 @@ export class AuthService {
     this.router.navigate(['/login']); // Redirect to login page after logout
   }
 
+
+  // Add flat associated with the user ID
+  async addFlat(city: string, streetName: string, streetNumber: number, 
+    areaSize: number, yearBuilt: number, rentPrice: number, 
+    dateAvailable: Date) {
+    const user = await this.afAuth.currentUser;
+    if (user) {
+      return this.firestore.collection('flats').add({
+        city: city,
+        streetName: streetName,
+        streetNumber: streetNumber,
+        areaSize: areaSize,
+        yearBuilt: yearBuilt,
+        rentPrice: rentPrice,
+        dateAvailable: dateAvailable,
+        user: user.uid,
+        createAt: new Date()
+      });
+    } else {
+      throw new Error('User not authenticated')
+    }
+  }
 
 }
