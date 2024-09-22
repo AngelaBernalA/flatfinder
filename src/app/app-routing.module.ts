@@ -7,6 +7,7 @@ import { ProfileUpdateComponent } from './components/profile-update/profile-upda
 import { AllUsersComponent } from './components/all-users/all-users.component';
 import { AdminGuard } from './guards/admin.guard';
 import { NewFlatComponent } from './components/new-flat/new-flat.component';
+import { FlatViewComponent } from './components/flat-view/flat-view.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'profile-update', component: ProfileUpdateComponent },
   { path: 'all-users', component: AllUsersComponent, canActivate: [AdminGuard] },
-  { path: 'new-flat', component: NewFlatComponent}
+  { path: 'new-flat', component: NewFlatComponent},
+  { path: 'flat-view', component: FlatViewComponent}
 ];
 
 @NgModule({

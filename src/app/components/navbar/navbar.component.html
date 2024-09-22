@@ -1,5 +1,5 @@
 <nav>
-  <a routerLink="/">Home</a>
+  <a routerLink="/flat-view">Home</a>
 
   <!-- Show profile link if the user is logged in -->
   <div *ngIf="user$ | async as user; else loggedOut">
@@ -14,7 +14,7 @@
     <!-- Only show All Users link if the current user is an admin -->
     <a *ngIf="authService.isUserAdmin()" routerLink="/all-users">All Users</a>
 
-    <a routerLink="new-flat/">New Flat</a>
+    <a routerLink="/new-flat">New Flat</a>
     
     <!-- Logout button -->
     <button (click)="logout()">Logout</button>

@@ -1,3 +1,5 @@
+<div class="newflat-container">
+    <h2>New Flat</h2>
 <form [formGroup]="newFlat" (ngSubmit)="addFlat()">
     <div>
         <label for="city">City:</label>
@@ -56,3 +58,5 @@
     </div>
     <button type="submit" [disabled]="newFlat.invalid">Submit</button>
 </form>
+
+</div>
