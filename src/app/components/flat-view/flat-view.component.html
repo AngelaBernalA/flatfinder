@@ -1,24 +1,28 @@
+<div class="all-flats-container">
 <table>
     <thead>
       <tr>
-        <th>City {{ flat.city }}</th>
+        <th>City</th>
         <th>Street Name</th>
         <th>Street Number</th>
         <th>Area Size</th>
         <th>Year Built</th>
         <th>Rent Price</th>
         <th>Date Available</th>
+        <th>User</th>
+        <th>Favourite</th>
       </tr>
     </thead>
     <tbody>
-        <tr>
-        <td></td>
+        <tr *ngFor="let flat of flats">   
+        <td>{{ flat.city }}</td>
         <td>{{ flat.streetName }}</td>
         <td>{{ flat.streetNumber }}</td>
         <td>{{ flat.areaSize }}</td>
         <td>{{ flat.yearBuilt }}</td>
-        <td>{{ flat.rentPrice }}</td>
+        <td>${{ flat.rentPrice }}</td>
         <td>{{ flat.dateAvailable }}</td>
       </tr>
     </tbody>
   </table>
+</div>

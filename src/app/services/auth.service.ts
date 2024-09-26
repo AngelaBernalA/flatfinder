@@ -112,7 +112,8 @@ export class AuthService {
     dateAvailable: Date) {
     const user = await this.afAuth.currentUser;
     if (user) {
-      return this.firestore.collection('flats').add({
+      try {
+      await this.firestore.collection('flats').add({
         city: city,
         streetName: streetName,
         streetNumber: streetNumber,
@@ -123,7 +124,12 @@ export class AuthService {
         user: user.uid,
         createAt: new Date()
       });
-    } else {
+      alert('Flat successfully added!');
+        this.router.navigate(['/flat-view']);
+    } catch (error) {
+      console.log('Error adding flat: ', error);
+    }
+   } else {
       throw new Error('User not authenticated')
     }
   }

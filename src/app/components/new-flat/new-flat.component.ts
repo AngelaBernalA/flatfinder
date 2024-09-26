@@ -25,14 +25,11 @@ export class NewFlatComponent {
   addFlat() {
     if (this.newFlat.valid) {
       const {city, streetName, streetNumber, areaSize, yearBuilt, rentPrice, dateAvailable } = this.newFlat.value;
-      this.authService.addFlat(city, streetName, streetNumber, areaSize, yearBuilt, rentPrice, dateAvailable).then(() => {
-        console.log('Flat added successfully');
-        this.newFlat.reset();
-      })
-      .catch(error => {
-        console.error('Error adding apartment', error);
-      });
+      this.authService.addFlat(city, streetName, streetNumber, areaSize, yearBuilt, rentPrice, dateAvailable)
+      }
+      else {
+        alert('Please ensure all fields are valid');
+      };
     }
   }
   
-}

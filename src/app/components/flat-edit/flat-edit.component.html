@@ -1,0 +1,62 @@
+<div class="flatform-container">
+    <h2>Edit Flat</h2>
+<form [formGroup]="flatForm" (ngSubmit)="updateFlat()">
+    <div>
+        <label for="city">City:</label>
+        <input id="city" formControlName="city"/>
+        <div *ngIf="flatForm.get('city')?.invalid && flatForm.get('city')?.touched">
+            City is required.
+        </div>
+    </div>
+
+    <div>
+        <label for="streetName">StreetName:</label>
+        <input id="streetName" formControlName="streetName" type="string" />
+        <div *ngIf="flatForm.get('streetName')?.invalid && flatForm.get('streetName')?.touched">
+            Street Name is required.
+        </div>
+    </div>
+
+    <div>
+        <label for="streetNumber">StreetNumber:</label>
+        <input id="streetNumber" formControlName="streetNumber" type="number" />
+        <div *ngIf="flatForm.get('streetNumber')?.invalid && flatForm.get('streetNumber')?.touched">
+            Street Number is required and must be a number.
+        </div>
+    </div>
+
+    <div>
+        <label for="areaSize">Area Size:</label>
+        <input id="areaSize" formControlName="areaSize" type="number" />
+        <div *ngIf="flatForm.get('areaSize')?.invalid && flatForm.get('areaSize')?.touched">
+            Area Size is required and must be a number.
+        </div>
+    </div>
+
+    <div>
+        <label for="yearBuilt">Year Built:</label>
+        <input id="yearBuilt" formControlName="yearBuilt" type="number" />
+        <div *ngIf="flatForm.get('yearBuilt')?.invalid && flatForm.get('yearBuilt')?.touched">
+            Year Built is required and must be a number.
+        </div>
+    </div>
+
+    <div>
+        <label for="rentPrice">Rent Price:</label>
+        <input id="rentPrice" formControlName="rentPrice" type="number" />
+        <div *ngIf="flatForm.get('rentPrice')?.invalid && flatForm.get('rentPrice')?.touched">
+            Rent Price is required and must be a number.
+        </div>
+    </div>
+
+    <div>
+        <label for="dateAvailable">Date Available:</label>
+        <input id="dateAvailable" formControlName="dateAvailable" type="date" />
+        <div *ngIf="flatForm.get('dateAvailable')?.invalid && flatForm.get('dateAvailable')?.touched">
+            Date Available is required.
+        </div>
+    </div>
+    <button type="submit" [disabled]="flatForm.invalid">Submit</button>
+</form>
+
+</div>
