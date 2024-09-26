@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
 import { AllUsersComponent } from './components/all-users/all-users.component';
+import { FlatEditComponent } from './components/flat-edit/flat-edit.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AllUsersComponent } from './components/all-users/all-users.component';
     NavbarComponent,
     ProfileComponent,
     ProfileUpdateComponent,
-    AllUsersComponent
+    AllUsersComponent,
+    FlatEditComponent
   ],
   imports: [
     BrowserModule,
