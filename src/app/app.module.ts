@@ -20,6 +20,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
 import { AllUsersComponent } from './components/all-users/all-users.component';
 import { FlatEditComponent } from './components/flat-edit/flat-edit.component';
+import { FlatInfoComponent } from './components/flat-info/flat-info.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { FlatEditComponent } from './components/flat-edit/flat-edit.component';
     ProfileComponent,
     ProfileUpdateComponent,
     AllUsersComponent,
-    FlatEditComponent
+    FlatEditComponent,
+    FlatInfoComponent
   ],
   imports: [
     BrowserModule,

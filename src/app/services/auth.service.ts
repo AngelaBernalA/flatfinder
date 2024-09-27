@@ -122,6 +122,7 @@ export class AuthService {
         rentPrice: rentPrice,
         dateAvailable: dateAvailable,
         user: user.uid,
+        firstName: user.email,
         createAt: new Date()
       });
       alert('Flat successfully added!');

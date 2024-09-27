@@ -10,7 +10,7 @@
         <th>Rent Price</th>
         <th>Date Available</th>
         <th>User</th>
-        <th>Favourite</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +22,8 @@
         <td>{{ flat.yearBuilt }}</td>
         <td>${{ flat.rentPrice }}</td>
         <td>{{ flat.dateAvailable }}</td>
+        <td></td>
+        <td><button [routerLink]="['/flats', flat.id]">View flat</button></td>
       </tr>
     </tbody>
   </table>
