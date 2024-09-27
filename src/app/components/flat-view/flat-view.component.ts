@@ -13,19 +13,24 @@ export class FlatViewComponent implements OnInit{
   constructor(private firestore: AngularFirestore) {}
 
   ngOnInit(): void {
-    // Fetch all flats from Firestore
-    this.firestore.collection('flats').valueChanges().subscribe((flats: any[]) => {
-      this.flats = flats;
-
-      this.flats.forEach(flat =>{
+    // Fetch all flats from Firestore and include their document ID
+    this.firestore.collection('flats').snapshotChanges().subscribe(snapshot => {
+      this.flats = snapshot.map(doc => {
+        const flatData = doc.payload.doc.data() as object;
+        const flatId = doc.payload.doc.id; // Extract the document ID (flat ID)
+        return { id: flatId, ...flatData }; // Combine the ID with the flat data
+      });
+  
+      // Fetch user names for each flat
+      this.flats.forEach(flat => {
         this.firestore.collection('users').doc(flat.user).valueChanges().subscribe((user: any) => {
-          if (user){
+          if (user) {
             flat.userName = `${user.firstName} ${user.lastName}`;
-          }else{
+          } else {
             flat.userName = "Unknown User";
           }
-        })
-      })
+        });
+      });
     });
   }
 }

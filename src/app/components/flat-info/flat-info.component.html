@@ -1,10 +1,45 @@
-<div *ngIf="flat">
-    <h2>Flat details</h2>
-    <p><strong>City:</strong>{{ flat.city }}</p>
-    <p><strong>Street Name:</strong>{{ flat.streetName }}</p>
-    <p><strong>Street Number:</strong>{{ flat.streetNumber }}</p>
-    <p><strong>Area size:</strong>{{ flat.areaSize }}</p>
-    <p><strong>Year Built:</strong>{{ flat.yearBuilt }}</p>
-    <p><strong>Rent Price:</strong>{{ flat.rentPrice }}</p>
-    <p><strong>Date Available:</strong>{{ flat.dateAvailable }}</p>
-</div>
+<div class="flat-info-container">
+    <h2 class="flat-title">{{ flat?.title }}</h2>
+  
+    <div class="flat-details">
+      <p><strong>City:</strong> {{ flat?.city }}</p>
+      <p><strong>Street:</strong> {{ flat?.streetName }} {{ flat?.streetNumber }}</p>
+      <p><strong>Area Size:</strong> {{ flat?.areaSize }} sqm</p>
+      <p><strong>Year Built:</strong> {{ flat?.yearBuilt }}</p>
+      <p><strong>Rent Price:</strong> ${{ flat?.rentPrice }}</p>
+      <p><strong>Date Available:</strong> {{ flat?.dateAvailable | date }}</p>
+    </div>
+  
+    <button class="btn-edit" *ngIf="isOwner" (click)="editFlat()">Edit Flat</button>
+  
+    <!-- Messages Section -->
+    <div class="message-section" *ngIf="!isOwner">
+      <h3>Send a Message to the Owner</h3>
+      <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+        <textarea formControlName="content" class="message-input" placeholder="Your message"></textarea>
+        <button type="submit" class="btn-send" [disabled]="messageForm.invalid">Send</button>
+      </form>
+    </div>
+  
+    <!-- Owner's Messages -->
+    <div *ngIf="isOwner && messages.length > 0" class="messages">
+      <h3>Messages About This Flat</h3>
+      <div *ngFor="let message of messages" class="message-item">
+        <p><strong>{{ message.senderName }} ({{ message.senderEmail }})</strong></p>
+        <p>{{ message.content }}</p>
+        <p class="message-timestamp">{{ message.createdAt | date: 'medium' }}</p>
+        <hr />
+      </div>
+    </div>
+  
+    <!-- Non-owner's Messages -->
+    <div *ngIf="!isOwner && userMessages.length > 0" class="messages">
+      <h3>Your Messages</h3>
+      <div *ngFor="let message of userMessages" class="message-item">
+        <p>{{ message.content }}</p>
+        <p class="message-timestamp">{{ message.createdAt | date: 'medium' }}</p>
+        <hr />
+      </div>
+    </div>
+  </div>
+  

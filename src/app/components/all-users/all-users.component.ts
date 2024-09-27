@@ -27,10 +27,14 @@ export class AllUsersComponent implements OnInit {
   applyFilters() {
     this.filteredUsers = this.users.filter(user => {
       const age = this.calculateAge(user.birthDate);
-      const isUserTypeMatch = this.filters.userType === '' || (this.filters.userType === 'admin' && user.isAdmin) || (this.filters.userType === 'regular' && !user.isAdmin);
+      const isUserTypeMatch = this.filters.userType === '' || 
+                              (this.filters.userType === 'admin' && user.isAdmin) || 
+                              (this.filters.userType === 'regular' && !user.isAdmin);
       const isAgeMatch = age >= this.filters.minAge && age <= this.filters.maxAge;
-      const isFlatsMatch = user.flatsCounter >= this.filters.minFlats && user.flatsCounter <= this.filters.maxFlats;
-      const isAdminMatch = this.filters.isAdmin === '' || (this.filters.isAdmin === 'true' && user.isAdmin) || (this.filters.isAdmin === 'false' && !user.isAdmin);
+      const isFlatsMatch = (user.flatsCounter || 0) >= this.filters.minFlats && (user.flatsCounter || 0) <= this.filters.maxFlats;
+      const isAdminMatch = this.filters.isAdmin === '' || 
+                           (this.filters.isAdmin === 'true' && user.isAdmin === true) || 
+                           (this.filters.isAdmin === 'false' && user.isAdmin === false);
       return isUserTypeMatch && isAgeMatch && isFlatsMatch && isAdminMatch;
     });
   }
@@ -40,6 +44,16 @@ export class AllUsersComponent implements OnInit {
     // Fetch all users from Firestore
     this.firestore.collection('users').valueChanges().subscribe((users: any[]) => {
       this.users = users;
+      
+      // Initialize flats counter for each user
+      this.users.forEach(user => {
+        this.firestore.collection('flats', ref => ref.where('user', '==', user.uid))
+          .valueChanges()
+          .subscribe(flats => {
+            user.flatsCounter = flats.length;  // Store the number of flats for each user
+          });
+      });
+  
       this.filteredUsers = [...this.users];  // Initialize filtered users
     });
   }
