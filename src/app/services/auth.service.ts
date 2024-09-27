@@ -122,7 +122,6 @@ export class AuthService {
         rentPrice: rentPrice,
         dateAvailable: dateAvailable,
         user: user.uid,
-        firstName: user.email,
         createAt: new Date()
       });
       alert('Flat successfully added!');
@@ -134,5 +133,15 @@ export class AuthService {
       throw new Error('User not authenticated')
     }
   }
+
+  getFlats (userId: string): Observable<any[]> {
+    return this.firestore.collection('flats', ref => ref.where('user', '==', userId)).valueChanges();
+  }
+
+  removeFlat(flatId: string): Promise<void> {
+    return this.firestore.collection('flats').doc(flatId).delete();
+  }
+
+
 
 }

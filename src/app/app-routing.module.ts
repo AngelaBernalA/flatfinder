@@ -10,6 +10,7 @@ import { NewFlatComponent } from './components/new-flat/new-flat.component';
 import { FlatViewComponent } from './components/flat-view/flat-view.component';
 import { FlatEditComponent } from './components/flat-edit/flat-edit.component';
 import { FlatInfoComponent } from './components/flat-info/flat-info.component';
+import { MyFlatsComponent } from './components/my-flats/my-flats.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'new-flat', component: NewFlatComponent},
   { path: 'flat-view', component: FlatViewComponent},
   { path: 'flat-edit', component: FlatEditComponent},
-  { path: 'flats/:id', component: FlatInfoComponent}
+  { path: 'flats/:id', component: FlatInfoComponent},
+  { path: 'my-flats', component: MyFlatsComponent}
 ];
 
 @NgModule({
