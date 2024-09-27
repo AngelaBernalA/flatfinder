@@ -8,6 +8,9 @@
     <!-- Profile link -->
     <a routerLink="/profile">Profile</a>
 
+     <!-- User's flats link -->
+     <a routerLink="/my-flats">My Flats</a>
+
     <!-- Edit Profile link (shown if the user is an admin or editing their own profile) -->
     <a *ngIf="authService.isUserAdmin() || isCurrentUser" routerLink="/profile-update">Edit Profile</a>
 

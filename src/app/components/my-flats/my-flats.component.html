@@ -1,0 +1,32 @@
+<div class="my-flats-container">
+    <table>
+        <thead>
+          <tr>
+            <th>City</th>
+            <th>Street Name</th>
+            <th>Street Number</th>
+            <th>Area Size</th>
+            <th>Year Built</th>
+            <th>Rent Price</th>
+            <th>Date Available</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let flat of flats">   
+            <td>{{ flat.city }}</td>
+            <td>{{ flat.streetName }}</td>
+            <td>{{ flat.streetNumber }}</td>
+            <td>{{ flat.areaSize }}</td>
+            <td>{{ flat.yearBuilt }}</td>
+            <td>${{ flat.rentPrice }}</td>
+            <td>{{ flat.dateAvailable }}</td>
+            <td>
+                <button>View</button>
+                <button routerLink="/flat-edit">Edit</button>
+                <button (click)="removeFlat(flat)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

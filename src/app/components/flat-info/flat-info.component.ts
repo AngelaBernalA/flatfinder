@@ -10,7 +10,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class FlatInfoComponent implements OnInit {
   flat: any;
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore) { }
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore) {}
 
 
   ngOnInit(): void {

@@ -21,6 +21,7 @@ import { ProfileUpdateComponent } from './components/profile-update/profile-upda
 import { AllUsersComponent } from './components/all-users/all-users.component';
 import { FlatEditComponent } from './components/flat-edit/flat-edit.component';
 import { FlatInfoComponent } from './components/flat-info/flat-info.component';
+import { MyFlatsComponent } from './components/my-flats/my-flats.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { FlatInfoComponent } from './components/flat-info/flat-info.component';
     ProfileUpdateComponent,
     AllUsersComponent,
     FlatEditComponent,
-    FlatInfoComponent
+    FlatInfoComponent,
+    MyFlatsComponent
   ],
   imports: [
     BrowserModule,
