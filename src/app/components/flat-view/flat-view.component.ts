@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
@@ -9,14 +8,24 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   styleUrl: './flat-view.component.css'
 })
 export class FlatViewComponent implements OnInit{
-  flats: any
+  flats: any[] = [];
 
-  constructor(private authService: AuthService, private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore) {}
 
   ngOnInit(): void {
     // Fetch all flats from Firestore
     this.firestore.collection('flats').valueChanges().subscribe((flats: any[]) => {
       this.flats = flats;
+
+      this.flats.forEach(flat =>{
+        this.firestore.collection('users').doc(flat.user).valueChanges().subscribe((user: any) => {
+          if (user){
+            flat.userName = `${user.firstName} ${user.lastName}`;
+          }else{
+            flat.userName = "Unknown User";
+          }
+        })
+      })
     });
   }
 }

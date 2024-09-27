@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./navbar.component.css'] 
 })
 export class NavbarComponent implements OnInit {
-  user$: Observable<any>;
+  user$: Observable<any | null>;
   isCurrentUser: boolean = false;
 
   constructor(public authService: AuthService) {
@@ -17,9 +17,15 @@ export class NavbarComponent implements OnInit {
 
   async ngOnInit() {
     const currentUser = await this.authService.getCurrentAuthUser();
+
     this.user$.subscribe(user => {
-      // Check if the logged-in user is the same as the current user
-      this.isCurrentUser = currentUser ? user.uid === currentUser.uid : false;
+      if (user) {
+        // If the user is logged in, check if they are the current user
+        this.isCurrentUser = currentUser ? user.uid === currentUser.uid : false;
+      } else {
+        // Handle the case when no user is logged in
+        this.isCurrentUser = false;
+      }
     });
   }
 

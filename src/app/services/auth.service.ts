@@ -91,7 +91,7 @@ export class AuthService {
     try {
       // Sign in the user with email and password
       await this.afAuth.signInWithEmailAndPassword(email, password);
-      this.router.navigate(['/']); // Redirect to the homepage after login
+      this.router.navigate(['/flat-view']); // Redirect to the homepage after login
     } catch (error: any) {
       // Handle and display login errors
       console.error('Login error: ', error.message);
