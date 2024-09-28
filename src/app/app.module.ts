@@ -22,6 +22,7 @@ import { AllUsersComponent } from './components/all-users/all-users.component';
 import { FlatEditComponent } from './components/flat-edit/flat-edit.component';
 import { FlatInfoComponent } from './components/flat-info/flat-info.component';
 import { MyFlatsComponent } from './components/my-flats/my-flats.component';
+import { FavoriteFlatsComponent } from './components/favorite-flats/favorite-flats.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MyFlatsComponent } from './components/my-flats/my-flats.component';
     AllUsersComponent,
     FlatEditComponent,
     FlatInfoComponent,
-    MyFlatsComponent
+    MyFlatsComponent,
+    FavoriteFlatsComponent
   ],
   imports: [
     BrowserModule,
