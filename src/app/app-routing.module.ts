@@ -13,6 +13,7 @@ import { FlatInfoComponent } from './components/flat-info/flat-info.component';
 import { MyFlatsComponent } from './components/my-flats/my-flats.component';
 import { FavoriteFlatsComponent } from './components/favorite-flats/favorite-flats.component';
 
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -23,10 +24,10 @@ const routes: Routes = [
   { path: 'all-users', component: AllUsersComponent, canActivate: [AdminGuard] },
   { path: 'new-flat', component: NewFlatComponent},
   { path: 'flat-view', component: FlatViewComponent},
-  { path: 'flat-edit', component: FlatEditComponent},
   { path: 'flats/:id', component: FlatInfoComponent},
   { path: 'my-flats', component: MyFlatsComponent},
   { path: 'favorite-flats', component: FavoriteFlatsComponent },
+  { path: 'edit-flat/:id', component: FlatEditComponent }
 ];
 
 @NgModule({

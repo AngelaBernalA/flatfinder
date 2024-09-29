@@ -28,25 +28,25 @@ export class FlatInfoComponent implements OnInit {
       content: ['', [Validators.required]]
     });
   }
-
   ngOnInit(): void {
     const flatId = this.route.snapshot.paramMap.get('id') ?? '';
-
-  console.log('Flat ID:', flatId); // Log the flat ID to verify if it's correct
-
-  if (!flatId) {
-    console.error('Flat ID is missing');
-    return;
-  }
-
-  // Fetch the flat's data
-  this.firestore.collection('flats').doc(flatId).valueChanges().subscribe((flat: any) => {
-    if (!flat) {
-      console.error('Flat data not found');
+  
+    console.log('Flat ID:', flatId); // Log the flat ID to verify if it's correct
+  
+    if (!flatId) {
+      console.error('Flat ID is missing');
       return;
     }
-
-    this.flat = flat;
+  
+    // Fetch the flat's data
+    this.firestore.collection('flats').doc(flatId).valueChanges().subscribe((flat: any) => {
+      if (!flat) {
+        console.error('Flat data not found');
+        return;
+      }
+  
+      // Add the flatId to the flat object
+      this.flat = { id: flatId, ...flat };
   
       // Check if the current user is the owner of the flat
       this.authService.getCurrentAuthUser().then(user => {

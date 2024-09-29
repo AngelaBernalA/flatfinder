@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-flat-edit',
@@ -10,54 +9,65 @@ import { Router } from '@angular/router';
   styleUrl: './flat-edit.component.css'
 })
 export class FlatEditComponent implements OnInit {
-  flatForm!: FormGroup;
-  currentUser: any;
+  flatForm: FormGroup;
+  flatId: string = ''; // Flat ID to fetch the flat from Firestore
 
   constructor(
-    private authService: AuthService,
     private firestore: AngularFirestore,
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router
-  ) { }
-
-  ngOnInit(): void {
-    this.authService.getUser().subscribe(user => {
-      if (user) {
-        this.currentUser = user;
-
-        this.flatForm = this.fb.group({
-          city: [user.city,[Validators.required]],
-          streetName: [user.streetName, [Validators.required]],
-          streetNumber: [user.streetNumber, [Validators.required, Validators.pattern('^[0-9]+$')]],
-          areaSize: [user.areaSize, [Validators.required, Validators.pattern('^[0-9]+$')]],
-          yearBuilt: [user.yearBuilt, [Validators.required, Validators.pattern('^[0-9]+$')]],
-          rentPrice: [user.rentPrice, [Validators.required, Validators.pattern('^[0-9]+$')]],
-          dateAvailable: [user.dateAvailable, Validators.required],
-        })
-      }
-    })
+  ) {
+    // Initialize the form with validators
+    this.flatForm = this.fb.group({
+      city: ['', [Validators.required]],
+      streetName: ['', [Validators.required]],
+      streetNumber: ['', [Validators.required]],
+      areaSize: ['', [Validators.required]],
+      yearBuilt: ['', [Validators.required]],
+      rentPrice: ['', [Validators.required]],
+      dateAvailable: ['', [Validators.required]]
+    });
   }
 
-  async updateFlat () {
-    if (this.flatForm.valid) {
-      const flatData = this.flatForm.value;
+  ngOnInit(): void {
+    this.flatId = this.route.snapshot.paramMap.get('id') ?? '';
+  
+    if (this.flatId) {
+      this.firestore.collection('flats').doc(this.flatId).valueChanges().subscribe((flat: any) => {
+        if (flat) {
+          this.flatForm.patchValue({
+            city: flat.city || '',
+            streetName: flat.streetName || '',
+            streetNumber: flat.streetNumber || '',
+            areaSize: flat.areaSize || '',
+            yearBuilt: flat.yearBuilt || '',
+            rentPrice: flat.rentPrice || '',
+            dateAvailable: flat.dateAvailable || ''
+          });
+        } else {
+          console.error('Flat data not found');
+        }
+      }, error => {
+        console.error('Error fetching flat data: ', error);
+      });
+    } else {
+      console.error('Flat ID is undefined or empty');
+    }
+  }
+  
 
-      try {
-        await this.firestore.collection('flats').doc(this.currentUser.uid).update({
-          city: flatData.city,
-          streetName: flatData.streetName,
-          streetNumber: flatData.streetNumber,
-          areaSize: flatData.areaSize,
-          yearBuilt: flatData.yearBuilt,
-          rentPrice: flatData.rentPrice,
-          dateAvailable: flatData.dateAvailable
-        });
-        alert ('Flat updated successfully');
-        this.router.navigate(['/']);
-      } catch (error: any) {
-        console.error('Error updating flat', error.message);
-        alert ('Error updating profile: ' + error.message);
-      }
+  // Handle form submission
+  onSubmit(): void {
+    if (this.flatForm.valid) {
+      // Update the flat data in Firestore
+      this.firestore.collection('flats').doc(this.flatId).update(this.flatForm.value).then(() => {
+        alert('Flat updated successfully.');
+        this.router.navigate(['/my-flats']); // Redirect to my-flats after update
+      }).catch(error => {
+        console.error('Error updating flat: ', error);
+        alert('Failed to update flat.');
+      });
     }
   }
 }

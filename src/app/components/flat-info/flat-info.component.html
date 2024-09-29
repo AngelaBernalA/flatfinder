@@ -8,9 +8,10 @@
       <p><strong>Year Built:</strong> {{ flat?.yearBuilt }}</p>
       <p><strong>Rent Price:</strong> ${{ flat?.rentPrice }}</p>
       <p><strong>Date Available:</strong> {{ flat?.dateAvailable | date }}</p>
+      
     </div>
   
-    <button class="btn-edit" *ngIf="isOwner" (click)="editFlat()">Edit Flat</button>
+    <button class="btn-edit" *ngIf="isOwner" [routerLink]="['/edit-flat',flat.id]">Edit Flat</button>
   
     <!-- Messages Section -->
     <div class="message-section" *ngIf="!isOwner">

@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class FlatViewComponent implements OnInit{
   flats: any[] = [];
+  filteredFlats: any[] = [];
+  searchTerm: string = ''; // This will bind to the search input
 
   constructor(
     private firestore: AngularFirestore,
@@ -66,4 +68,5 @@ export class FlatViewComponent implements OnInit{
       }
     });
   }
+
 }
