@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let flat of flats">   
+            <tr *ngFor="let flat of userFlats">   
             <td>{{ flat.city }}</td>
             <td>{{ flat.streetName }}</td>
             <td>{{ flat.streetNumber }}</td>
@@ -22,9 +22,8 @@
             <td>${{ flat.rentPrice }}</td>
             <td>{{ flat.dateAvailable }}</td>
             <td>
-                <button>View</button>
-                <button routerLink="/flat-edit">Edit</button>
-                <button (click)="removeFlat(flat)">Delete</button>
+                <button [routerLink]="['/flats', flat.id]">View</button>
+                <button (click)="deleteFlat(flat.id)">Remove</button> 
             </td>
           </tr>
         </tbody>

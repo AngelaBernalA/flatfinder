@@ -1,65 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FlatData } from '../../models/flat-data.model';
-
 
 @Component({
   selector: 'app-my-flats',
   templateUrl: './my-flats.component.html',
-  styleUrl: './my-flats.component.css'
+  styleUrls: ['./my-flats.component.css']
 })
-export class MyFlatsComponent implements OnInit{
-  flats: any[] = [];
-  userId!: string;
+export class MyFlatsComponent implements OnInit {
+  userFlats: any[] = [];
 
-  constructor(private authService: AuthService, private firestore: AngularFirestore) {}
- 
-  ngOnInit() {
-    // Fetch all flats from Firestore
+  constructor(private firestore: AngularFirestore, private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
     this.authService.getCurrentAuthUser().then(user => {
       if (user) {
-        this.userId = user.uid; // Ensure you have the user ID
-        this.authService.getFlats(this.userId).subscribe(data => {
-          this.flats = data;
-        });
+        // Fetch flats published by the user
+        this.firestore.collection('flats', ref => ref.where('user', '==', user.uid))
+          .snapshotChanges()
+          .subscribe(snapshot => {
+            this.userFlats = snapshot.map(doc => {
+              const flatData = doc.payload.doc.data() as object;
+              const flatId = doc.payload.doc.id;
+              return { id: flatId, ...flatData }; // Combine ID with flat data
+            });
+          });
       } else {
-        console.error("User not logged in");
-        // Handle the case where the user is not logged in
+        // Redirect to login if user is not logged in
+        this.router.navigate(['/login']);
       }
-    }).catch(error => {
-      console.error("Error fetching user: ", error);
     });
   }
 
-
-    removeFlat(flat: any) {
-      if (confirm(`Are you sure you want to remove ${flat.city} flat?`)) {
-        this.firestore.collection('flats').doc(flat.id).delete()
-       //this.authService.removeFlat(flat.id)
-       .then(() => {
-        console.log (`${flat.city} flat removed from Firestore`);
-       })
-       .catch(error => {
-        console.error("Error removing flat: ", error);
-       });
-
-
-
-        // this.firestore.collection('flats').doc(flat.id).delete()
-        //   .then(() => {
-        //     console.log(`${flat.City} flat removed from Firestore`);
-        //   })
-        //   .catch(error => {
-        //     console.error("Error removing flat: ", error);
-        //   });
-      }
+  // Delete a flat
+  deleteFlat(flatId: string): void {
+    if (confirm('Are you sure you want to delete this flat?')) {
+      this.firestore.collection('flats').doc(flatId).delete().then(() => {
+        // Remove the flat from the local array
+        this.userFlats = this.userFlats.filter(flat => flat.id !== flatId);
+        alert('Flat deleted successfully.');
+      }).catch(error => {
+        console.error('Error deleting flat: ', error);
+      });
     }
-
-
-
-
-
-
   }
+}
